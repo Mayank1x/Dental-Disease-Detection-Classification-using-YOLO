@@ -54,17 +54,3 @@ The project is built entirely on open-source libraries and frameworks.
 
 ---
 
-## 🚀 Installation and Setup
-
-Follow these steps to get your local development environment running.
-
-### Prerequisites
-
-* Python 3.9 or higher
-* pip (Python package installer)
-
-### Step 1: Clone the Repository
-
-```bash
-git clone [https://github.com/Mayank1x/Dental-Disease-Detection-Classification-using-YOLO.git](https://github.com/Mayank1x/Dental-Disease-Detection-Classification-using-YOLO.git)
-cd Dental-Disease-Detection-Classification-using-YOLO
