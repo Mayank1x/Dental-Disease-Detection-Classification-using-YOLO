@@ -30,8 +30,6 @@ This project implements a **YOLOv8 (You Only Look Once, Version 8)** object dete
 
 ## 🖼️ Demo and Results
 
-*(**Action Item:** Replace the placeholder below with a GIF or screenshot of your model detecting a dental disease, showing bounding boxes and labels.)*
-
 **Example of Disease Detection:**
 
 | Input X-ray Image | Model Output (Detection) |
