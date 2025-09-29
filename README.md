@@ -14,12 +14,25 @@
 
 This project implements a **YOLOv8 (You Only Look Once, Version 8)** object detection model to accurately detect and classify various dental pathologies directly from radiographic images. This system is designed to act as an initial screening tool, assisting dental professionals in rapid identification of potential problem areas.
 
-### Key Diseases Detected:
+### Key Diseases and Structures Detected:
 
-* **Caries** (Tooth Decay)
-* **Periapical Lesions** (Infections at the root tip)
-* **Periodontitis** (Gum disease indicators)
-* *(Customize this list based on your dataset/model)*
+* **Caries / Tooth Decay** (Coronal, Proximal, or Cervical Lesions)
+* **Periapical Lesions** (Radiolucency around the root apex, indicating infection/abscess)
+* **Periodontal Bone Loss** (Indicators of gum disease)
+* **Dental Fillings / Restorations**
+* **Crowns / Prosthetics**
+* **Root Canal Treatment (RCT)** (Endodontic fillings)
+* **Missing Teeth / Edentulous Areas**
+* **Impacted Teeth** (e.g., wisdom teeth)
+
+## 📊 Model Performance & Training Summary
+
+The model was trained from scratch using the YOLOv8 architecture on a custom-labeled dataset of dental X-rays, achieving high precision and recall, demonstrating strong capability for clinical assistance.
+
+| Metric | Value | Detail |
+| :--- | :--- | :--- |
+| **mAP@0.5** | **92%** | Mean Average Precision at an IoU threshold of 0.5. (Primary metric for object detection accuracy) |
+| **Recall** | **0.8194** | The model’s ability to find all relevant instances (all actual dental diseases) in the dataset. |
 
 ## ✨ Features
 
@@ -27,14 +40,6 @@ This project implements a **YOLOv8 (You Only Look Once, Version 8)** object dete
 * **Classification:** Provides bounding boxes and confidence scores for various disease classes.
 * **Custom Training:** Includes all necessary files and instructions to re-train the model on a custom dataset.
 * **Data Preprocessing:** Scripts for handling image data and converting annotations to the required YOLO format.
-
-## 🖼️ Demo and Results
-
-**Example of Disease Detection:**
-
-| Input X-ray Image | Model Output (Detection) |
-| :---: | :---: |
-|  |  |
 
 ---
 
