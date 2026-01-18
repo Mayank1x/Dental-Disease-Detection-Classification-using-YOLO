@@ -1,84 +1,338 @@
 .aboutContainer {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: fadeIn 1s ease-out;
-}
-
-.aboutContainer h2 {
-  color: #3498db;
-  margin-bottom: 2rem;
-  text-align: center;
-  font-size: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
 }
 
 .section {
+  margin-bottom: 4rem;
+}
+
+.section:last-of-type {
+  margin-bottom: 0;
+}
+
+.sectionHeader {
   margin-bottom: 2rem;
-  animation: fadeIn 1.2s ease-out;
 }
 
-.section h3 {
-  color: #2ecc71;
+.sectionTitle {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.titleUnderline {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-cyan));
   margin-bottom: 1rem;
-  font-size: 1.5rem;
 }
 
-.section ul {
-  list-style-type: none;
+.sectionSubtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+}
+
+/* Overview Section */
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.overviewCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.overviewCard:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.cardText {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.capabilityList {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.section ul li {
-  margin-bottom: 0.8rem;
+.capabilityList li {
+  color: var(--text-secondary);
+  padding: 0.75rem 0;
   padding-left: 1.5rem;
   position: relative;
-  color: #ecf0f1;
+  line-height: 1.6;
 }
 
-.section ul li:before {
-  content: "•";
+.capabilityList li::before {
+  content: '';
   position: absolute;
   left: 0;
-  color: #3498db;
+  top: 1.1rem;
+  width: 6px;
+  height: 6px;
+  background: var(--primary-cyan);
+  border-radius: 50%;
 }
 
-.metrics {
+/* Metrics Section */
+.metricsContainer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  margin-top: 1.5rem;
 }
 
-.metric {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+.metricCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
-  transition: transform 0.3s ease;
-  animation: fadeIn 1.4s ease-out;
+  padding: 2rem;
+  transition: all 0.3s ease;
 }
 
-.metric:hover {
-  transform: translateY(-5px);
+.metricCard:hover {
+  border-color: var(--primary-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.15);
 }
 
-.value {
-  display: block;
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.metricLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metricBadge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary-cyan);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  font-weight: 500;
+}
+
+.metricValue {
   font-size: 2.5rem;
-  background: linear-gradient(135deg, #3498db, #2ecc71);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-cyan);
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
-.label {
-  display: block;
-  color: #bdc3c7;
-  margin-top: 0.5rem;
+.metricSubtext {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Disease Grid */
+.diseaseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.diseaseCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.diseaseCard:hover {
+  border-color: var(--primary-blue);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.diseaseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+}
+
+.diseaseName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+.diseaseCategory {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--primary-cyan);
+  border-radius: 12px;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.diseaseDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Technology Grid */
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.techCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: all 0.3s ease;
+}
+
+.techCard:hover {
+  border-color: var(--primary-blue);
+  transform: translateY(-2px);
+}
+
+.techCategory {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.techName {
   font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-cyan);
+  margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.techDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Disclaimer Section */
+.disclaimerSection {
+  margin-top: 3rem;
+}
+
+.disclaimerCard {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(239, 68, 68, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.disclaimerHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.disclaimerIcon {
+  width: 28px;
+  height: 28px;
+  color: var(--warning-amber);
+  flex-shrink: 0;
+}
+
+.disclaimerTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--warning-amber);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+.disclaimerText {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.disclaimerText strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .aboutContainer {
+    padding: 2rem 1rem;
+  }
+
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .overviewGrid,
+  .metricsContainer,
+  .diseaseGrid,
+  .techGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .overviewCard,
+  .metricCard,
+  .diseaseCard,
+  .techCard {
+    padding: 1.5rem;
+  }
+
+  .metricValue {
+    font-size: 2rem;
+  }
+
+  .disclaimerCard {
+    padding: 1.5rem;
+  }
 }
