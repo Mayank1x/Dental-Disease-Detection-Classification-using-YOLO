@@ -52,12 +52,13 @@ const ImageUpload = ({ onImageUpload, onResults }) => {
       const formData = new FormData();
       formData.append('file', uploadedFile);
 
-      const response = await axios.post('http://localhost:5000/predict', formData);
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await axios.post(`${apiUrl}/predict`, formData);
 
       const { predictions, annotatedImageUrl } = response.data;
       const fullAnnotatedUrl = annotatedImageUrl.startsWith('http')
         ? annotatedImageUrl
-        : `http://localhost:5000${annotatedImageUrl}`;
+        : `${apiUrl}${annotatedImageUrl}`;
 
       console.log("✅ Prediction Response:", response.data);
 
