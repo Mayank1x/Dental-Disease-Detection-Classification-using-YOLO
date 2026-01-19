@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import numpy as np
 import cv2
 import os
-from werkzeug.utils import secure_filename
+import gc
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -13,8 +13,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 OUTPUT_DIR = 'outputs'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Load trained model
-model = YOLO('new.pt')  # Make sure this file exists
+# Global model variable (Lazy Load)
+model = None
 
 @app.route("/")
 def home():
@@ -22,6 +22,8 @@ def home():
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    global model
+    
     if 'file' not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
 
@@ -30,6 +32,11 @@ def predict():
         return jsonify({"error": "No file selected"}), 400
 
     try:
+        # Lazy Load Model (Only load when needed to save RAM on boot)
+        if model is None:
+            print("Loading Model...") 
+            model = YOLO('new.pt')
+
         # Decode image
         file_bytes = np.frombuffer(file.read(), np.uint8)
         img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
@@ -58,7 +65,7 @@ def predict():
                 "confidence": round(conf * 100, 2)
             })
 
-        # Return static image path (with anti-cache param)
+        # Return response
         return jsonify({
             "predictions": output,
             "annotatedImageUrl": f"/outputs/{annotated_filename}"
@@ -67,6 +74,9 @@ def predict():
     except Exception as e:
         app.logger.exception("Error during prediction:")
         return jsonify({"error": str(e)}), 500
+    finally:
+        # Force garbage collection to free RAM
+        gc.collect()
 
 # Serve annotated images
 @app.route('/outputs/<path:filename>')
