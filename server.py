@@ -16,6 +16,10 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # Load trained model
 model = YOLO('new.pt')  # Make sure this file exists
 
+@app.route("/")
+def home():
+    return "Backend is running! 🚀"
+
 @app.route("/predict", methods=["POST"])
 def predict():
     if 'file' not in request.files:
