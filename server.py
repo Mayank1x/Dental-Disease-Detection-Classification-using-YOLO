@@ -20,8 +20,11 @@ model = None
 def home():
     return "Backend is running! 🚀"
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST", "OPTIONS"])
 def predict():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+
     global model
     
     if 'file' not in request.files:
@@ -43,8 +46,12 @@ def predict():
         if img is None:
             return jsonify({"error": "Invalid image file"}), 400
 
+        # RESIZE IMAGE TO SAVE MEMORY (Critical for Free Tier)
+        # Use standard YOLO input size 640x640
+        img = cv2.resize(img, (640, 640))
+
         # Run YOLO prediction
-        results = model.predict(source=img, conf=0.5)
+        results = model.predict(source=img, conf=0.5, imgsz=640)
         pred = results[0]
 
         # Annotate image
