@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Client } from "@gradio/client";
 import styles from './ImageUpload.module.css';
 
 const ImageUpload = ({ onImageUpload, onResults }) => {
@@ -49,22 +50,31 @@ const ImageUpload = ({ onImageUpload, onResults }) => {
     try {
       if (!uploadedFile) throw new Error("No file selected!");
 
-      const formData = new FormData();
-      formData.append('file', uploadedFile);
+      if (!uploadedFile) throw new Error("No file selected!");
 
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await axios.post(`${apiUrl}/predict`, formData);
+      console.log("🔄 Connecting to Hugging Face Space...");
+      // Try connecting with a timeout logic if possible, or just log
+      const client = await Client.connect("Mayank1x/Dental-Disease-Prediction-using-YOLO"); // ⚠️ REPLACE WITH YOUR SPACE NAME
+      console.log("✅ Connected! Checking available APIs...");
+      const api_info = await client.view_api();
+      console.log("Listen to this:", api_info);
 
-      const { predictions, annotatedImageUrl } = response.data;
-      const fullAnnotatedUrl = annotatedImageUrl.startsWith('http')
-        ? annotatedImageUrl
-        : `${apiUrl}${annotatedImageUrl}`;
+      console.log("🚀 Sending image...");
+      // Using positional arguments [uploadedFile] is safer than named arguments
+      const result = await client.predict("/predict", [
+        uploadedFile,
+      ]);
 
-      console.log("✅ Prediction Response:", response.data);
+      console.log("✅ Prediction Response received:", result);
+
+      const annotatedImage = result.data[0].url; // Gradio returns an object with url
+      const predictions = result.data[1]; // JSON output
+
+      console.log("📊 Processed Data:", { annotatedImage, predictions });
 
       onResults({
         predictions,
-        annotatedImage: fullAnnotatedUrl, // Ensure correct key is passed
+        annotatedImage,
       });
 
     } catch (error) {
@@ -72,6 +82,7 @@ const ImageUpload = ({ onImageUpload, onResults }) => {
       alert("Prediction failed. Check console for details.");
     } finally {
       setLoading(false);
+      console.log("🏁 Predict function finished (finally block)");
     }
   };
 
